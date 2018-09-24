@@ -3,13 +3,16 @@
  @import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
 
 html {
+    text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(255, 255, 255);
     min-height: 100%;
     position: relative;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
   body {
+    background-image: url("assets/cielo_azul.jpg");
     margin: 0;
     margin-bottom: 0px;
+    border-bottom-color: transparent;
   }
   footer {
     background-color: transparent;
@@ -22,12 +25,13 @@ html {
 img{
   margin-bottom: 0%;
   width: 100%;
-  height: fit-content;
+  height: 100%;
 }
 
 div{
-
+  background-color: transparent;
   margin:auto;
+  color: white;
 }
 
 
