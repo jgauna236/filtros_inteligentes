@@ -4,6 +4,7 @@
 
 html {
     text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(255, 255, 255);
+    text-align: center;
     min-height: 100%;
     position: relative;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -11,7 +12,6 @@ html {
   body {
     background-image: url("assets/cielo_azul.jpg");
     margin: 0;
-    margin-bottom: 0px;
     border-bottom-color: transparent;
   }
   footer {
@@ -33,6 +33,20 @@ div{
   margin:auto;
   color: white;
 }
+p{
+  text-align: center;
+  vertical-align: middle;
+}
+ .card{
+   margin-top: 5%;
+   margin-bottom: 5%;
+   box-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(255, 255, 255)
+ }
+
+ .mb-3{
+    margin-top: 2%;
+   background-color: rgba(219, 238, 255, 0.445);
+ }
 
 
 /*!
