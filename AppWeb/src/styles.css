@@ -28,10 +28,17 @@ img{
   height: 100%;
 }
 
+button{
+  width: 2in;
+  margin: 3%;
+}
 div{
   background-color: transparent;
   margin:auto;
   color: white;
+}
+.animated.zoomIn{
+  margin: 0%;
 }
 p{
   text-align: center;
