@@ -1,7 +1,3 @@
-/*
- * Hello world web server
- * circuits4you.com
- */
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
@@ -10,20 +6,28 @@
 //SSID and Password of your WiFi router
 const char* ssid = "AndroidAP";
 const char* password = "12345678";
+int respond = 0;
 String response;
 
 ESP8266WebServer server(80); //Server on port 80
 
 void execute(String operacion){
-  if(DEBUG){Serial.println("START");}
   Serial.println(operacion);
-  while(!Serial.available());
-  response = Serial.readString();
-
-  if(DEBUG){Serial.println(response);}
-  if(DEBUG){Serial.println("Send response");}
-  server.send(200, "text/plain", response);
-  if(DEBUG){Serial.println("END");}
+  respond = 0;
+  for(int i = 0; i<50 && !respond; i++){
+    if(Serial.available()){
+      response = Serial.readString();
+      respond = 1;
+    }else{
+      delay(100);
+    }
+  }
+  if(respond){
+    server.send(200, "text/plain", response);
+  }else{
+    server.send(200, "text/plain", "ERROR: TIMEOUT");
+  }
+  
   return;
 }
 
@@ -32,11 +36,11 @@ void execute(String operacion){
 //===============================================================
 void handleRoot(){ server.send(200, "text/plain", "OK"); }
 void handleStatus(){ execute("STATUS"); }
+void handleStop(){ execute("STOP"); }
 void handleFilter(){ execute("FILTER"); }
 void handleWash(){ execute("WASH"); }
-void handleStop(){ execute("STOP"); }
+void handleRinse(){ execute("RINSE"); }
 void handleDrain(){ execute("DRAIN"); }
-void handleLoad(){ execute("LOAD"); }
 
 //==============================================================
 //                  SETUP
@@ -45,31 +49,31 @@ void setup(void){
   Serial.begin(9600);
   
   WiFi.begin(ssid, password);//Connect to your WiFi router
-  Serial.println("");
+  if(DEBUG){ Serial.println(""); }
 
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+    if(DEBUG){ Serial.print("."); }
   }
 
   //If connection successful show IP address in serial monitor
-  Serial.println("");
-  Serial.print("Connected to ");
-  Serial.println(ssid);
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());  //IP address assigned to your ESP
+  if(DEBUG){ Serial.println(""); }
+  if(DEBUG){ Serial.print("Connected to "); }
+  if(DEBUG){ Serial.println(ssid); }
+  if(DEBUG){ Serial.print("IP address: "); }
+  Serial.println(WiFi.localIP()); //IP address assigned to your ESP
  
   server.on("/", handleRoot);
-  server.on("/stop", handleStop);
-  server.on("/load", handleLoad);
   server.on("/status", handleStatus);
+  server.on("/stop", handleStop);
   server.on("/filter", handleFilter);
   server.on("/wash", handleWash);
+  server.on("/rinse", handleWash);
   server.on("/drain", handleDrain);
-
+  
   server.begin();//Start server
-  Serial.println("HTTP server started");
+  if(DEBUG){ Serial.println("HTTP server started"); }
 }
 //==============================================================
 //                     LOOP
