@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input  } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Filtro Inteligente';
+  public estado = 'inicial';
+
+  cambiarEstado(estado: string) {
+    this.estado = estado;
+    console.log('nuevo estado ' + this.estado);
+  }
+
 }

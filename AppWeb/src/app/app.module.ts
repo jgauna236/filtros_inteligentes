@@ -10,11 +10,11 @@ import { FiltradoComponent } from './filtrado/filtrado.component';
 import { LavadoComponent } from './lavado/lavado.component';
 import { DesagoteComponent } from './desagote/desagote.component';
 import { EnjuagueComponent } from './enjuague/enjuague.component';
-import { SocketService } from './socket.service';
-import { SocketIoModule, SocketIoConfig } from 'ng6-socket-io';
 import { IpsearchComponent } from './ipsearch/ipsearch.component';
+import { SocketService } from './socket.service';
+import { AppRoutingModule } from './app-routing.module';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     BrowserModule,
     FormsModule,
     NgbModule.forRoot(),
-    SocketIoModule.forRoot(config)
+    AppRoutingModule
   ],
   providers: [SocketService],
   bootstrap: [AppComponent]

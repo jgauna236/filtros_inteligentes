@@ -28,12 +28,14 @@
     "http-errors": "^1.7.1",
     "jquery": "^3.3.1",
     "morgan": "^1.9.1",
+    "ng-socket-io": "^0.2.4",
     "ng6-socket-io": "^1.0.3",
     "popper": "^1.0.1",
     "rxjs": "~6.2.0",
     "rxjs-compat": "^6.3.3",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.1.1",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

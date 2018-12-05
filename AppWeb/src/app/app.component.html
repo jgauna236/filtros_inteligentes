@@ -5,7 +5,7 @@
     {{ title }}
   </h1>
 </div>
-<div class=" animated flipInX card mb-3" style="max-width: 15rem">
+<div *ngIf="estado === 'todo bien'" class=" animated flipInX card mb-3" style="max-width: 15rem">
   <li class ="row">
     <div class="animated fadeIn card bg-primary" style="min-width: 13rem; "><p class="card-text ">Pileta llena</p></div>
     <!-- <div class="animated infinite flash card bg-danger" style="min-width: 13rem; "><p class="card-text ">Pileta vacía</p></div> -->
@@ -16,8 +16,9 @@
   </li>
 </div>
 <div class="animated zoomIn">
-<app-ipsearch></app-ipsearch>
+<app-ipsearch *ngIf="estado === 'inicial'" (estadoEvent)="cambiarEstado($event)"></app-ipsearch>
+<app-apagado *ngIf="estado === 'todo bien'"></app-apagado>
 </div> 
 <footer>
-  <img src="assets/pileta.png" class="animated  slideInUp slower"/>
+  <img *ngIf="estado === 'todo bien'" src="assets/pileta.png" class="animated  slideInUp slower"/>
 </footer>
