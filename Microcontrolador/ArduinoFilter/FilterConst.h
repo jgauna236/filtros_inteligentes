@@ -13,6 +13,9 @@
   #define SENSOR_POOL  A0
   #define SENSOR_GLASS A1
 
+  //Reset del ESP8266
+  #define RESET A2
+
   //ESTADOS
   #define STOP    0
   #define FILTER  1

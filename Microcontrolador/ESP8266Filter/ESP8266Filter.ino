@@ -1,11 +1,10 @@
 #include <ESP8266WiFi.h>
-#include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
 #define DEBUG false
 //SSID and Password of your WiFi router
-const char* ssid = "AndroidAP";
-const char* password = "12345678";
+const char* ssid = "Telecentro-1a10";
+const char* password = "FGZJRDN3UZYY";
 int respond = 0;
 String response;
 
@@ -25,9 +24,12 @@ void execute(String operacion){
   if(respond){
     server.send(200, "text/plain", response);
   }else{
-    server.send(200, "text/plain", "ERROR: TIMEOUT");
+    server.send(200, "text/plain", "500 ERROR: TIMEOUT");
+
+    //Para evitar desincronizacion con el Arduino
+    while(!Serial.available());
+    response = Serial.readString();
   }
-  
   return;
 }
 
@@ -47,11 +49,12 @@ void handleDrain(){ execute("DRAIN"); }
 //==============================================================
 void setup(void){
   Serial.begin(9600);
-  
-  WiFi.begin(ssid, password);//Connect to your WiFi router
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
   if(DEBUG){ Serial.println(""); }
 
-  // Wait for connection
+    // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     if(DEBUG){ Serial.print("."); }
@@ -63,7 +66,8 @@ void setup(void){
   if(DEBUG){ Serial.println(ssid); }
   if(DEBUG){ Serial.print("IP address: "); }
   Serial.println(WiFi.localIP()); //IP address assigned to your ESP
- 
+
+  
   server.on("/", handleRoot);
   server.on("/status", handleStatus);
   server.on("/stop", handleStop);
@@ -72,8 +76,9 @@ void setup(void){
   server.on("/rinse", handleWash);
   server.on("/drain", handleDrain);
   
-  server.begin();//Start server
-  if(DEBUG){ Serial.println("HTTP server started"); }
+  server.begin(); //Start server
+  if(DEBUG){ Serial.println("Diagnóstico: "); }
+  if(DEBUG){ WiFi.printDiag(Serial); }
 }
 //==============================================================
 //                     LOOP
