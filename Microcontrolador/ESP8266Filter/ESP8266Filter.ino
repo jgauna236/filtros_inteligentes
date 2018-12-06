@@ -3,8 +3,8 @@
 
 #define DEBUG false
 //SSID and Password of your WiFi router
-const char* ssid = "Telecentro-1a10";
-const char* password = "FGZJRDN3UZYY";
+const char* ssid = "ESP8266";
+const char* password = "12345678";
 int respond = 0;
 String response;
 
@@ -48,35 +48,33 @@ void handleDrain(){ execute("DRAIN"); }
 //                  SETUP
 //==============================================================
 void setup(void){
+  delay(1000);
   Serial.begin(9600);
+  if(DEBUG){ Serial.println(); }
+  if(DEBUG){ Serial.println("Comienzo del Programa"); }
 
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  if(DEBUG){ Serial.println(""); }
-
-    // Wait for connection
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    if(DEBUG){ Serial.print("."); }
-  }
-
-  //If connection successful show IP address in serial monitor
-  if(DEBUG){ Serial.println(""); }
-  if(DEBUG){ Serial.print("Connected to "); }
-  if(DEBUG){ Serial.println(ssid); }
-  if(DEBUG){ Serial.print("IP address: "); }
-  Serial.println(WiFi.localIP()); //IP address assigned to your ESP
+  //Configuración del ESP8266 en modo AccessPoint
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP(ssid, password);
+  
+  IPAddress myIP = WiFi.softAPIP();
 
   
-  server.on("/", handleRoot);
+  if(DEBUG){ Serial.print("IP address: "); }
+  Serial.println(myIP); //IP address assigned to your ESP
+
+  
+  server.on("/ping", handleRoot);
   server.on("/status", handleStatus);
   server.on("/stop", handleStop);
   server.on("/filter", handleFilter);
   server.on("/wash", handleWash);
-  server.on("/rinse", handleWash);
+  server.on("/rinse", handleRinse);
   server.on("/drain", handleDrain);
   
   server.begin(); //Start server
+
+  
   if(DEBUG){ Serial.println("Diagnóstico: "); }
   if(DEBUG){ WiFi.printDiag(Serial); }
 }
