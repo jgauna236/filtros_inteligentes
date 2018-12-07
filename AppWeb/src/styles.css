@@ -3,7 +3,7 @@
  @import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
 
 html {
-    text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(255, 255, 255);
+    text-shadow: 0 0 3px rgb(143, 143, 143), 0 0 5px rgb(134, 134, 134);
     text-align: center;
     min-height: 100%;
     position: relative;
@@ -39,7 +39,7 @@ input{
 div{
   background-color: transparent;
   margin:auto;
-  color: white;
+  color: black;
 }
 .animated.zoomIn{
   margin: 0%;

@@ -16,9 +16,8 @@
   </li>
 </div>
 <div class="animated zoomIn">
-<app-ipsearch *ngIf="estado === 'inicial'" (estadoEvent)="cambiarEstado($event)"></app-ipsearch>
-<app-apagado *ngIf="estado === 'todo bien'"></app-apagado>
+<app-ipsearch  (estadoEvent)="cambiarEstado($event)"></app-ipsearch>
 </div> 
 <footer>
-  <img *ngIf="estado === 'todo bien'" src="assets/pileta.png" class="animated  slideInUp slower"/>
+  <img *ngIf="estado === 'todo_bien'" src="assets/pileta.png" class="animated  slideInUp slower"/>
 </footer>

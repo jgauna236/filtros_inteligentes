@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { IpsearchComponent } from './ipsearch/ipsearch.component';
 
+
+
 const appRoutes: Routes = [
-  { path: 'home', pathMatch: 'full', component: AppComponent },
+  { path: ':estado', pathMatch: 'full', component: AppComponent },
   { path: 'ip', pathMatch: 'full', component: IpsearchComponent }
 ];
 
@@ -17,8 +19,6 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: []
 })
 export class AppRoutingModule { }

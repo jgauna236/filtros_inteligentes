@@ -11,18 +11,19 @@ import { RouterModule, Routes, Router } from '@angular/router';
 })
 export class IpsearchComponent implements OnInit {
   private ip: string;
+  private mostrar: boolean;
 
   @Output() estadoEvent = new EventEmitter<string>();
 
-  constructor(private socketService: SocketService, private router: Router)  { }
+  constructor(private socketService: SocketService)  { }
 
   ngOnInit() {
     this.ip = '';
   }
 
   onKeydown() {
-    console.log('tecla ' + this.socketService.buscarMicro(this.ip));
-    this.estadoEvent.emit(this.socketService.buscarMicro(this.ip));
+    this.socketService.buscarMicro(this.ip);
+    this.mostrar = true;
   }
 
 }

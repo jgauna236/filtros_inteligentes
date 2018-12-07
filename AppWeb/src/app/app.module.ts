@@ -5,26 +5,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ApagadoComponent } from './apagado/apagado.component';
-import { FiltradoComponent } from './filtrado/filtrado.component';
-import { LavadoComponent } from './lavado/lavado.component';
-import { DesagoteComponent } from './desagote/desagote.component';
-import { EnjuagueComponent } from './enjuague/enjuague.component';
 import { IpsearchComponent } from './ipsearch/ipsearch.component';
 import { SocketService } from './socket.service';
 import { AppRoutingModule } from './app-routing.module';
-
+import { RouterModule } from '@angular/router';
+import { OpcionesComponent } from './opciones/opciones.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ApagadoComponent,
-    FiltradoComponent,
-    LavadoComponent,
-    DesagoteComponent,
-    EnjuagueComponent,
-    IpsearchComponent
+    IpsearchComponent,
+    OpcionesComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     NgbModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [SocketService],
+  providers: [SocketService, RouterModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

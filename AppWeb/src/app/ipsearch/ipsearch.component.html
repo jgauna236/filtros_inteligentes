@@ -2,8 +2,13 @@
    <h4>
      Ingrese el IP del microcontrolador
    </h4>
-   <h4>
-     {{estado}}
-   </h4>
-  <input  name="search" placeholder="Busqueda.." [(ngModel)]="ip" (keydown.enter)="onKeydown()">  
+
+  <input  name="search" placeholder="Busqueda.." [(ngModel)]="ip" (keydown.enter)="onKeydown()">
+  <h5 *ngIf = "mostrar">
+      {{ip}}
+    </h5>
+    <app-opciones *ngIf="mostrar" ></app-opciones>
 </div> 
+<footer>
+    <img *ngIf="mostrar" src="assets/pileta.png" class="animated  slideInUp slower"/>
+  </footer>

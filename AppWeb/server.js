@@ -6,9 +6,7 @@ var ip;
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var httpreq = new XMLHttpRequest();
 
-
-
-
+const delay = require('wait-sync');
 
 
   app.get('/', function(req, res){
@@ -25,34 +23,48 @@ var httpreq = new XMLHttpRequest();
       if (httpreq.status != 200) return '';
       return httpreq.responseText;
     }
+
+
     
     socket.on('busquedaIP', (ipParam, answer)=>{
       ip = ipParam;
       console.log('busqueda de micro con ip '+ ip);
-      var res = send('status');
+      var res = send('ping');
       console.log('estado: '+res);
       answer(res.toString());
 
     });
     
     socket.on('apagado', function(){
-      console.log('Se envia al micro la opcion de apagado');
+      console.log('Se envia al micro ' + ip + ' la opcion de apagado');
+      send('stop');
     });
   
     socket.on('filtrado', function(){
-      console.log('Se envia al micro la opcion de filtrado');
+      console.log('Se envia al micro ' + ip + ' la opcion de filtrado');
+      send('filter');
+      delay(3);
     });
   
     socket.on('lavado', function(){
-      console.log('Se envia al micro la opcion de lavado');
+      console.log('Se envia al micro ' + ip + ' la opcion de lavado');
+      send('wash');
+      delay(3);
+
     });
   
     socket.on('enjuague', function(){
-      console.log('Se envia al micro la opcion de enjuague');
+      console.log('Se envia al micro ' + ip + ' la opcion de enjuague');
+      send('rinse');
+      delay(3);
+
     });
   
     socket.on('desagote', function(){
-      console.log('Se envia al micro la opcion de desagote');
+      console.log('Se envia al micro ' + ip + ' la opcion de desagote');
+      send('drain');
+      delay(3);
+
     });
   
     socket.on('ping', function(socket){
